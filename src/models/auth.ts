@@ -1,7 +1,7 @@
 const url = 'localhost:4000/api';
 
 class Auth{
-    static register(data:object):object{
+    static register(data:object){
         return fetch(`${url}/auth/register`,{
             method:'POST',
             body:JSON.stringify(data),
