@@ -48,11 +48,12 @@ import {
   export const login = (username:String, password:String) => (dispatch:any) => {
     return AuthModel.login({username, password}).then(
       (data) => {
+        console.log('DATA',data)
         dispatch({
           type: LOGIN_SUCCESS,
           payload: { user: data },
         });
-  
+        localStorage.setItem("uid", data.token);
         return Promise.resolve();
       },
       (error) => {
@@ -78,7 +79,7 @@ import {
   };
   
   export const logout = () => (dispatch:any) => {
-    //AuthModel.logout();
+    localStorage.removeItem("user");
   
     dispatch({
       type: LOGOUT,

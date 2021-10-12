@@ -1,25 +1,32 @@
-const url = 'localhost:4000/api';
+const url = 'http://localhost:4000/api';
 
 class User{
-    static show(id:String|Number){
-        return fetch(`${url}/users/${id}`).then(response=>response.json())
-    }
-
-    static update(id:String|Number,data:object){
-        return fetch(`${url}/users/${id}`,{
-            method:'PUT',
-            body:JSON.stringify(data),
+    static show(){
+        return fetch(`${url}/users/`,{
+            method:'GET',
             headers:{
-                'Content-type':'application/json'
+                authorization:`Bearer ${localStorage.uid}`
             }
         }).then(response=>response.json())
     }
 
-    static delete(id:String|Number){
-        return fetch(`${url}/users/${id}`,{
+    static update(data:object){
+        return fetch(`${url}/users/`,{
+            method:'PUT',
+            body:JSON.stringify(data),
+            headers:{
+                'Content-type':'application/json',
+                authorization:`Bearer ${localStorage.uid}`
+            }
+        }).then(response=>response.json())
+    }
+
+    static delete(){
+        return fetch(`${url}/users/`,{
             method:'DELETE',
             headers:{
-                'Content-type':'application/json'
+                'Content-type':'application/json',
+                authorization:`Bearer ${localStorage.uid}`
             }
         }).then(response=>response.json())
     }

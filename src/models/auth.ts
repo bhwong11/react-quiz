@@ -1,4 +1,4 @@
-const url = 'localhost:4000/api';
+const url = 'http://localhost:4000/api';
 
 class Auth{
     static register(data:object){
