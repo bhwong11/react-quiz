@@ -7,7 +7,7 @@ import {
     SET_MESSAGE,
   } from "./types";
   
-  import {AuthModel} from "../models";
+  import {AuthModel,UserModel} from "../models";
   
   export const register = (username:String, email:String, password:String) => (dispatch:any) => {
     return AuthModel.register({username, email, password}).then(
@@ -47,16 +47,15 @@ import {
   
   export const login = (username:String, password:String) => (dispatch:any) => {
     return AuthModel.login({username, password}).then(
-      (data) => {
+      (data:any) => {
         console.log('DATA',data)
         dispatch({
           type: LOGIN_SUCCESS,
           payload: { user: data },
         });
-        localStorage.setItem("uid", data.token);
         return Promise.resolve();
       },
-      (error) => {
+      (error:any) => {
         const message =
           (error.response &&
             error.response.data &&
@@ -79,6 +78,7 @@ import {
   };
   
   export const logout = () => (dispatch:any) => {
+    localStorage.removeItem("uid");
     localStorage.removeItem("user");
   
     dispatch({

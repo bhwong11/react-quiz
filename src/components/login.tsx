@@ -1,8 +1,9 @@
 import React,{useState} from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/auth";
+import { RootState } from "../reducers";
 
 const required = (value:any) => {
   if (!value) {
@@ -20,6 +21,11 @@ const Login=(props:any)=>{
   const [password,setPassword] =useState("");
   const [loading,setLoading] =useState(false);
 
+  const { isLoggedIn } = useSelector((state:RootState) => state.auth);
+  const { message } = useSelector((state:RootState) => state.message);
+
+  const dispatch = useDispatch();
+
 
   function onChangeUsername(e:any) {
     setUsername(e.target.value)
@@ -34,18 +40,13 @@ const Login=(props:any)=>{
 
     setLoading(true)
 
-    const { dispatch, history } = props;
+    const { history } = props;
 
       dispatch(login(username,password))
-        .then(() => {
-          history.push("/profile");
-          window.location.reload();
-        })
-        .catch(() => {
-          setLoading(false)
-        });
+      props.history.push("/profile");
+      window.location.reload();
   }
-  const { isLoggedIn, message } = props;    
+   
 
     return (
       <div className="col-md-12">
@@ -106,13 +107,4 @@ const Login=(props:any)=>{
     );
 }
 
-function mapStateToProps(state:any) {
-  const { isLoggedIn } = state.auth;
-  const { message } = state.message;
-  return {
-    isLoggedIn,
-    message
-  };
-}
-
-export default connect(mapStateToProps)(Login);
+export default Login;

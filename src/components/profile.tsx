@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from 'react-router-dom';
-import { connect } from "react-redux";
+import { connect,useSelector } from "react-redux";
 import {UserModel} from "../models";
+import { RootState } from "../reducers";
 
 const Profile= (props:any)=>{
-
-    const [currentUser,setCurrentUser] = useState(props.user)
+    const {user:currentUser} = useSelector((state: RootState)=>state.auth)
     const [username,setUsername] = useState("");
     const [email,setEmail] = useState("");
     const [completeScore,setCompleteScore] = useState(0);
@@ -45,7 +45,8 @@ const Profile= (props:any)=>{
       <div className="container">
         <header className="jumbotron">
           <h3>
-            <strong>{username}</strong> Profile
+          <strong>USER!! {currentUser.user.username}</strong>
+            <strong>{username} {currentUser.username}</strong> Profile
           </h3>
         </header>
         <p>
@@ -63,11 +64,4 @@ const Profile= (props:any)=>{
     );
 }
 
-function mapStateToProps(state:any) {
-  const { user } = state.auth;
-  return {
-    user,
-  };
-}
-
-export default connect(mapStateToProps)(Profile);
+export default Profile;

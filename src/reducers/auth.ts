@@ -5,12 +5,9 @@ import {
     LOGIN_FAIL,
     LOGOUT,
   } from "../actions/types";
-
-  import {UserModel} from '../models'
   
-  const user:any = localStorage.getItem("uid");
-
-  
+  const user:any = JSON.parse(localStorage.getItem("user") || '{}');
+  console.log('REDYCE USRE',user)
   const initialState = user
     ? { isLoggedIn: true, user }
     : { isLoggedIn: false, user: null };
@@ -29,12 +26,13 @@ import {
           ...state,
           isLoggedIn: false,
         };
-      case LOGIN_SUCCESS:
+      case LOGIN_SUCCESS:{
         return {
           ...state,
           isLoggedIn: true,
           user: payload.user,
-        };
+        }
+      };
       case LOGIN_FAIL:
         return {
           ...state,
@@ -48,6 +46,8 @@ import {
           user: null,
         };
       default:
-        return state;
+        return {
+          ...state,
+        };
     }
   }

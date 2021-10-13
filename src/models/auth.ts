@@ -11,14 +11,23 @@ class Auth{
         }).then(response=>response.json())
     }
 
-    static login(data:object){
-        return fetch(`${url}/auth/login`,{
+    static async login(data:object){
+        const responseResult = await fetch(`${url}/auth/login`,{
             method:'POST',
             body:JSON.stringify(data),
             headers:{
                 'Content-Type':'application/json'
             }
-        }).then(response=>response.json())
+        }).then(response=>{
+            return response.json()
+            }).then(json=>{
+                console.log('JSON!!!!!',json)
+                localStorage.setItem('uid',json.token)
+                localStorage.setItem('user',JSON.stringify(json))
+                return json
+        })
+        return responseResult
+        
     }
 }
 
