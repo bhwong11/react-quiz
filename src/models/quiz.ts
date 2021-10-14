@@ -4,12 +4,13 @@ class Quiz{
     static all(){
         return fetch(`${url}/quiz`).then(response=>response.json())
     }
-    static create(){
+    static create(data:object){
         return fetch(`${url}/quiz`,{
             method:'POST',
+            body:JSON.stringify(data),
             headers:{
                 'Content-type':'application/json'
-            }
+            },
         }).then(response=>response.json())
     }
     static show(id:String | Number){

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { register } from "../actions/auth";
 
 
@@ -10,6 +10,7 @@ const Register =(props:any)=>{
     const [email,setEmail] = useState("")
     const [password,setPassword] =useState("");
     const [successful,setSuccessful]=useState(false)
+    const dispatch = useDispatch();
 
   function onChangeUsername(e:any) {
     setUsername(e.target.value)
@@ -23,20 +24,16 @@ const Register =(props:any)=>{
     setPassword(e.target.value)
   }
 
-  function handleRegister(e:any) {
+  async function handleRegister(e:any) {
     e.preventDefault();
     setSuccessful(false)
-
-      props
-        .dispatch(
-          register(username, email, password)
-        )
-        .then(() => {
-            setSuccessful(true)
-        })
-        .catch(() => {
-            setSuccessful(false)
-        });
+    try{
+      const registerResult:any =  await dispatch(register(username, email, password))
+      setSuccessful(true)
+    }catch(err){
+      setSuccessful(false)
+    }
+     
   }
 
     const { message } = props;
@@ -110,11 +107,4 @@ const Register =(props:any)=>{
     );
 }
 
-function mapStateToProps(state:any) {
-  const { message } = state.message;
-  return {
-    message,
-  };
-}
-
-export default connect(mapStateToProps)(Register);
+export default Register;

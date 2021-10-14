@@ -7,7 +7,6 @@ import {
   } from "../actions/types";
   
   const user:any = JSON.parse(localStorage.getItem("user") || '{}');
-  console.log('REDYCE USRE',user)
   const initialState = user
     ? { isLoggedIn: true, user }
     : { isLoggedIn: false, user: null };

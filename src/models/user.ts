@@ -1,6 +1,14 @@
 const url = 'http://localhost:4000/api';
 
 class User{
+    static all(){
+        return fetch(`${url}/users/all`,{
+            method:'GET',
+            headers:{
+                authorization:`Bearer ${localStorage.uid}`
+            }
+        }).then(response=>response.json())
+    }
     static show(){
         return fetch(`${url}/users/`,{
             method:'GET',

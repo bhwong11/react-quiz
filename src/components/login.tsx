@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/auth";
 import { RootState } from "../reducers";
+import { AnyCnameRecord } from 'dns';
 
 const required = (value:any) => {
   if (!value) {
@@ -35,16 +36,22 @@ const Login=(props:any)=>{
     setPassword(e.target.value)
   }
 
-  function handleLogin(e:any) {
+  async function handleLogin(e:any) {
     e.preventDefault();
 
     setLoading(true)
 
     const { history } = props;
+    try{
+      const loginResult:any = await dispatch(login(username,password))
 
-      dispatch(login(username,password))
       props.history.push("/profile");
       window.location.reload();
+    }catch(err){
+      console.log(err)
+    }
+  
+      
   }
    
 
