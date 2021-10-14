@@ -20,9 +20,9 @@ const Rank= (props:any)=>{
 
     return ( 
         <div>
-            {loading?<p>loading...</p>:<div>Hello{users.map((user:any,index:any)=>{
-            return <div>{index+1} {user.username}</div>
-        }).sort((a:any,b:any) => a.userScore - b.userScore)}</div>}
+            {loading?<p>loading...</p>:<div>Hello{users.sort((a:any,b:any) => b.userScore - a.userScore).slice(0,10).map((user:any,index:any)=>{
+            return <div>{index+1} {user.username} score:{user.userScore}</div>
+        })}</div>}
         </div>
     );
 }

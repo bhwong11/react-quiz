@@ -39,15 +39,28 @@ const Home=(props:any)=>{
     const [userAnswers,setUserAnswers] = useState<AnswerObject[]>([]);
     const [score,setScore]=useState(0);
     const [gameOver,setGameOver]=useState(true);
+    const [difficulty,setDifficulty]=useState(null);
   
-  
+    const selectDiff = (e:any)=>{
+      setDifficulty(e.target.value)
+      startTrivia()
+    }
+
     const startTrivia = async ()=>{
       try{
         setLoading(true)
         setGameOver(false)
+        let diffSetting = null
+        if(difficulty==='hard'){
+          diffSetting=Difficulty.HARD
+        }else if(difficulty==='medium'){
+          diffSetting=Difficulty.MEDIUM
+        }else{
+          diffSetting=Difficulty.EASY
+        } 
         const newQuestions = await fetchQuizQuestions(
         TOTAL_QUESTIONS,
-        Difficulty.EASY
+        diffSetting
       );
       console.log(newQuestions)
       setQuestions(newQuestions)
@@ -81,15 +94,19 @@ const Home=(props:any)=>{
           console.log(answer)
           if(number===9){
             let finalQScore: number = answerObject.correct?1:0;
+            setDifficulty(null)
+            setGameOver(true)
             console.log("SENDING REQUIEST")
-            await QuizModel.create({
+            if(isLoggedIn){
+              await QuizModel.create({
                 questions,
-                difficulty:"easy",
+                difficulty,
                 score:score+finalQScore,
                 user:currentUser.user._id
-            }).then(json=>{
-                console.log(json)
-            })
+                }).then(json=>{
+                  console.log(json)
+                })
+            }
         }
         }
     }
@@ -109,10 +126,15 @@ const Home=(props:any)=>{
         <>
         <GlobalStyle/>
         <Wrapper>
-          <h1>REACT QUIZ</h1>
+        <h1>REACT QUIZ</h1>
+          <>
           {
             gameOver || userAnswers.length==TOTAL_QUESTIONS?(
-              <button className="start" onClick={startTrivia}>Start</button>
+              <>
+              <><button onClick = {selectDiff} value='easy'>easy</button>
+              <button onClick = {selectDiff} value='medium'>medium</button>
+              <button onClick = {selectDiff} value='hard'>hard</button></>
+              </>
             ):<div>Game Started</div>
           }
           {
@@ -140,6 +162,7 @@ const Home=(props:any)=>{
               </button>
             ):null
           }
+          </>
           </Wrapper>
       </>
     );

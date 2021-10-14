@@ -11,17 +11,17 @@ import {
   
   export const register = (username:String, email:String, password:String) => (dispatch:any) => {
     return AuthModel.register({username, email, password}).then(
-      (response) => {
+      (data) => {
         dispatch({
           type: REGISTER_SUCCESS,
         });
   
         dispatch({
           type: SET_MESSAGE,
-          payload: response.message,
+          payload: data.message,
         });
   
-        return response;
+        return data;
       },
       (error) => {
         const message =
@@ -40,7 +40,7 @@ import {
           payload: message,
         });
   
-        return Promise.reject();
+        return error;
       }
     );
   };
@@ -53,7 +53,13 @@ import {
           type: LOGIN_SUCCESS,
           payload: { user: data },
         });
-        return Promise.resolve();
+        
+        dispatch({
+          type: SET_MESSAGE,
+          payload: data.message,
+        });
+
+        return data;
       },
       (error:any) => {
         const message =
@@ -71,7 +77,7 @@ import {
           payload: message,
         });
   
-        return Promise.reject();
+        return error;
       }
     );
   };

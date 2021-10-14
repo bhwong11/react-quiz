@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { register } from "../actions/auth";
 import { RootState } from "../reducers";
+import { Redirect } from 'react-router-dom';
 
 
 const Register =(props:any)=>{
@@ -12,8 +13,8 @@ const Register =(props:any)=>{
     const [password,setPassword] =useState("");
     const [successful,setSuccessful]=useState(false)
     const dispatch = useDispatch();
+    const { isLoggedIn } = useSelector((state:RootState) => state.auth);
     const { message } = useSelector((state:RootState) => state.message);
-
   function onChangeUsername(e:any) {
     setUsername(e.target.value)
   }
@@ -42,7 +43,10 @@ const Register =(props:any)=>{
   }
 
     return (
-      <div className="col-md-12">
+      <>
+      {
+        isLoggedIn?<Redirect to="/" />:
+        <div className="col-md-12">
         <div className="card card-container">
           <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -104,6 +108,8 @@ const Register =(props:any)=>{
           </form>
         </div>
       </div>
+      }
+      </>
     );
 }
 

@@ -43,18 +43,20 @@ const Login=(props:any)=>{
     const { history } = props;
     try{
       const loginResult:any = await dispatch(login(username,password))
-
-      props.history.push("/profile");
-      window.location.reload();
+      if(loginResult.status===200){
+        props.history.push("/profile");
+        window.location.reload();
+      }
     }catch(err){
       console.log(err)
     }
   
       
   }
-   
-
+  
     return (
+      <>
+      {isLoggedIn?<Redirect to="/" />:
       <div className="col-md-12">
         <div className="card card-container">
           <img
@@ -91,7 +93,6 @@ const Login=(props:any)=>{
             <div className="form-group">
               <button
                 className="btn btn-primary btn-block"
-                disabled={loading}
               >
                 {loading && (
                   <span className="spinner-border spinner-border-sm"></span>
@@ -110,6 +111,8 @@ const Login=(props:any)=>{
           </form>
         </div>
       </div>
+      }
+      </>
     );
 }
 

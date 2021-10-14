@@ -7,7 +7,7 @@ import {
   } from "../actions/types";
   
   const user:any = JSON.parse(localStorage.getItem("user") || '{}');
-  const initialState = user
+  const initialState = (user && Object.keys(user).length)
     ? { isLoggedIn: true, user }
     : { isLoggedIn: false, user: null };
   
