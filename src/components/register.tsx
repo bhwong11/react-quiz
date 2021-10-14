@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { register } from "../actions/auth";
+import { RootState } from "../reducers";
 
 
 const Register =(props:any)=>{
@@ -11,6 +12,7 @@ const Register =(props:any)=>{
     const [password,setPassword] =useState("");
     const [successful,setSuccessful]=useState(false)
     const dispatch = useDispatch();
+    const { message } = useSelector((state:RootState) => state.message);
 
   function onChangeUsername(e:any) {
     setUsername(e.target.value)
@@ -26,17 +28,18 @@ const Register =(props:any)=>{
 
   async function handleRegister(e:any) {
     e.preventDefault();
-    setSuccessful(false)
     try{
-      const registerResult:any =  await dispatch(register(username, email, password))
-      setSuccessful(true)
+      const registerResult:any =  await dispatch( register(username, email, password))
+      if(registerResult.status===200){
+        setSuccessful(true)
+        props.history.push("/login");
+        window.location.reload();
+      }
     }catch(err){
       setSuccessful(false)
     }
      
   }
-
-    const { message } = props;
 
     return (
       <div className="col-md-12">
@@ -98,9 +101,6 @@ const Register =(props:any)=>{
                 </div>
               </div>
             )}
-            <button>
-                Register
-            </button>
           </form>
         </div>
       </div>

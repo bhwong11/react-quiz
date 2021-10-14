@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/auth";
 import { RootState } from "../reducers";
-import { AnyCnameRecord } from 'dns';
 
 const required = (value:any) => {
   if (!value) {

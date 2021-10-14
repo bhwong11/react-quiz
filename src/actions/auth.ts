@@ -18,10 +18,10 @@ import {
   
         dispatch({
           type: SET_MESSAGE,
-          payload: response.data.message,
+          payload: response.message,
         });
   
-        return Promise.resolve();
+        return response;
       },
       (error) => {
         const message =
@@ -58,8 +58,7 @@ import {
       (error:any) => {
         const message =
           (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
+            error.response.message) ||
           error.message ||
           error.toString();
   
