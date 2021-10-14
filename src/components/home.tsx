@@ -124,8 +124,9 @@ const Home=(props:any)=>{
 
     return (
         <>
-        <GlobalStyle/>
-        <Wrapper>
+        <div className="gobal-style">
+        </div>
+        <div className="wrapper">
         <h1>REACT QUIZ</h1>
           <>
           {
@@ -163,7 +164,7 @@ const Home=(props:any)=>{
             ):null
           }
           </>
-          </Wrapper>
+        </div>
       </>
     );
 }
