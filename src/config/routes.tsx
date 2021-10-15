@@ -9,6 +9,7 @@ import register from "../components/register";
 import Home from "../components/home";
 import Rank from "../components/rank";
 import { logout } from "../actions/auth";
+import '../css/navbar.css'
 
 function Routes(props:any) {
   const {user:currentUser, isLoggedIn:isLoggedIn} = useSelector((state: RootState)=>state.auth)
@@ -20,17 +21,21 @@ function Routes(props:any) {
   return (
     <BrowserRouter>
     {isLoggedIn? 
-      <div className="container">
-          <li>{currentUser.user.username}</li>
+      <nav className="navbar">
+        <div className="nav_container">
+          <span>{currentUser.user.username}</span>
             <Link to={'/profile'}>Profile</Link>
             <Link to={'/'}>Play</Link>
             <a href="/login" onClick={logoutHandler}>Logout</a>
-      </div>:
-      <ul>
+        </div>
+      </nav>:
+      <nav>
+          <div className="nav_container">
             <Link to={'/'}>Play</Link>
             <Link to={'/login'}>Login</Link>
             <Link to={'/register'}>Register</Link>
-    </ul>
+          </div>
+      </nav>
         }
     <Switch>
       <Route exact path='/login' component={Login} />
