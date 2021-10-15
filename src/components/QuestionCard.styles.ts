@@ -18,13 +18,14 @@ export const Wrapper = styled.div`
 type ButtonWrapperProps = {
     correct: boolean;
     userClicked: boolean;
+    userResponse:boolean;
 };
 
 export const ButtonWrapper = styled.div<ButtonWrapperProps>`
     transition: all 0.3s ease;
 
     :hover{
-        opacity:0.8;
+        opacity:${({userResponse})=>userResponse?'1':'0.5'};
     }
 
     button{
@@ -36,14 +37,12 @@ export const ButtonWrapper = styled.div<ButtonWrapperProps>`
         margin: 5px 0;
         background:${({correct, userClicked})=>
             correct
-                ? 'linear-gradient(90deg, #56ffa4,#59bc86'
+                ? 'green'
                 :!correct && userClicked
-                ?'linear-gradient(90deg, #ff5656,#c16868)'
-                :'linear-gradient(90deg, #56ccff,#59bc86)'}
+                ?'red'
+                :'aqua'};
                 border: 3px solid #ffffff;
-                box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
-                color: #fff;
-                text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
+                color: black;
     }
 `

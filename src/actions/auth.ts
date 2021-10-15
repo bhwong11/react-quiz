@@ -83,6 +83,7 @@ import {
   };
   
   export const logout = () => (dispatch:any) => {
+    console.log('LOGOUT!!!')
     localStorage.removeItem("uid");
     localStorage.removeItem("user");
   

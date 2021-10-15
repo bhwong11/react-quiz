@@ -1,6 +1,6 @@
 import React from 'react';
 import {AnswerObject} from './home';
-import {Wrapper, ButtonWrapper} from './QuestionCard.styles'
+import { ButtonWrapper} from './QuestionCard.styles'
 
 type Props = {
     question: string;
@@ -27,8 +27,13 @@ const QuestionCard: React.FC<Props> = ({
                 <ButtonWrapper 
                 correct={userAnswer &&userAnswer.correctAnswer===answer?true:false} 
                 key={answer}
+                userResponse={userAnswer?true:false}
                 userClicked={userAnswer &&userAnswer.answer===answer?true:false}>
-                    <button disabled={userAnswer?true:false} value={answer} onClick={callback}>
+                    <button 
+                    disabled={userAnswer?true:false}
+                    value={answer} 
+                    style={userAnswer?{opacity:"0.5"}:{opacity:"1"}}
+                    onClick={callback}>
                         <span dangerouslySetInnerHTML={{__html:answer}}></span>
                     </button>
                 </ButtonWrapper>
