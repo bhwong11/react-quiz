@@ -1,0 +1,23 @@
+:root{
+    --green-sage:#C8CC92;
+    --lavender:#776274;
+    --light-pink:#E6CCBE;
+    --copper-rose:#A07178;
+    --dark-brown:#5A5353;
+    --background:#FFFAFA;
+}
+.profile_container{
+    margin-top:10vh;
+    display: flex;
+    justify-content: center;
+}
+.profile_wrapper{
+    max-width:320px;
+    background-color: var(--light-pink);
+    color:var(--dark-brown);
+    padding:10px;
+    border-radius: 5px;
+}
+.profile_wrapper .Profile_wrapper_element{
+    padding:5px;
+}

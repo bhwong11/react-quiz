@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import {UserModel} from "../models";
 import { RootState } from "../reducers";
+import '../css/profile.css'
 
 const Profile= (props:any)=>{
     const {user:currentUser, isLoggedIn:isLoggedIn} = useSelector((state: RootState)=>state.auth)
@@ -25,22 +26,28 @@ const Profile= (props:any)=>{
 
     return (
         <>{isLoggedIn? 
-      <div className="container">
-        <header className="jumbotron">
+      <div className="profile_container">
+        <div className="profile_wrapper">
+        <header className="Profile_wrapper_element Profile_wrapper_header">
           <h3>
-          <strong>USER!! {currentUser.user.username}</strong>
-          <strong>SCORE!! {currentUser.completeScore}</strong>
-          <strong>SCORE!! {currentUser.user.userScore}</strong>
-            <strong> {currentUser.username}</strong> Profile
+          <strong>USER: {currentUser.user.username}</strong>
           </h3>
         </header>
-        <p>
-          <strong>Id:</strong> {currentUser.user._id}
-        </p>
-        <p>
+        <p className="Profile_wrapper_element">
           <strong>Email:</strong> {currentUser.user.email}
         </p>
-        {userRank?<div>{userRank}</div>:<div>loading rank...</div>}
+        <p className="Profile_wrapper_element">
+          <strong>Score:</strong> {currentUser.completeScore}
+        </p>
+        {userRank?<p className="Profile_wrapper_element">
+          <strong>Rank:</strong>{userRank}
+          </p>:<p>loading rank...</p>}
+        <p className="Profile_wrapper_element">score is determined by correct questions: 
+            <div>*1 if easy</div>
+            <div>*5 if medium</div>
+            <div>*10 if hard</div>
+        </p>
+      </div>
       </div>:
       <Redirect to="/login" />
         }</>

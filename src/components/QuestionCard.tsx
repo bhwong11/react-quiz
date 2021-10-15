@@ -20,7 +20,7 @@ const QuestionCard: React.FC<Props> = ({
     totalQuestions
 })=>(
     <div className ="wrapper">
-        <p className = "number">Question:{questionNb}/{totalQuestions}</p>
+        <p className = "number home_text"><strong>Question:</strong>{questionNb}/{totalQuestions}</p>
         <p dangerouslySetInnerHTML ={{__html: question}}/>
         <div>
             {answers.map((answer)=>(

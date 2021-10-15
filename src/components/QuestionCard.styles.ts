@@ -40,9 +40,9 @@ export const ButtonWrapper = styled.div<ButtonWrapperProps>`
                 ? 'green'
                 :!correct && userClicked
                 ?'red'
-                :'aqua'};
+                :'#C8CC92'};
                 border: 3px solid #ffffff;
                 border-radius: 10px;
-                color: black;
+                color: #FFFAFA;
     }
 `

@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/auth";
 import { RootState } from "../reducers";
+import '../css/loginRegister.css'
 
 const required = (value:any) => {
   if (!value) {
@@ -57,13 +58,8 @@ const Login=(props:any)=>{
     return (
       <>
       {isLoggedIn?<Redirect to="/" />:
-      <div className="col-md-12">
-        <div className="card card-container">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-          />
+      <div className="login_container">
+        <div className="login_wrapper">
 
           <form
             onSubmit={handleLogin}
@@ -94,10 +90,9 @@ const Login=(props:any)=>{
               <button
                 className="btn btn-primary btn-block"
               >
-                {loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
+                {loading? (
+                  <span>loading...</span>
+                ):<span>Login</span>}
               </button>
             </div>
 

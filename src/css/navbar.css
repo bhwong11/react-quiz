@@ -1,11 +1,30 @@
+:root{
+    --green-sage:#C8CC92;
+    --lavender:#776274;
+    --light-pink:#E6CCBE;
+    --copper-rose:#A07178;
+    --dark-brown:#5A5353;
+    --background:#FFFAFA;
+}
+*{
+    margin:0;
+    padding:0;
+}
 nav{
     display:flex;
     justify-content:end;
+    padding:10px 0;
     width:100vw;
+    background-color: var(--lavender);
 }
 .nav_container{
-    padding:0 10px;
+    padding:10 0px;
 }
 .nav_container *{
     padding: 10px;
+    text-decoration: none;
+    color:var(--light-pink);
+}
+.nav_container span{
+    color:var(--green-sage);
 }

@@ -1,14 +1,14 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { Redirect } from 'react-router-dom';
 import {fetchQuizQuestions,QuestionState,Difficulty} from '../API'
 
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../actions/auth";
+import { useSelector } from "react-redux";
 import { RootState } from "../reducers";
 import QuestionCard from './QuestionCard';
 import {QuizModel} from '../models'
 //styles
 import { GlobalStyle, Wrapper } from './home.styles';
+import '../css/home.css';
 
 export type AnswerObject = {
   question:string;
@@ -40,6 +40,7 @@ const Home=(props:any)=>{
     const [score,setScore]=useState(0);
     const [gameOver,setGameOver]=useState(true);
     const [difficulty,setDifficulty]=useState(null);
+    const [showScore,setShowScore]=useState(true)
   
     const selectDiff = (e:any)=>{
       setDifficulty(e.target.value)
@@ -96,7 +97,6 @@ const Home=(props:any)=>{
             let finalQScore: number = answerObject.correct?1:0;
             setDifficulty(null)
             setGameOver(true)
-            console.log("SENDING REQUIEST")
             if(isLoggedIn){
               await QuizModel.create({
                 questions,
@@ -124,22 +124,25 @@ const Home=(props:any)=>{
 
     return (
         <>
-        <div className="gobal-style">
-        </div>
-        <div className="wrapper">
-        <h1>REACT QUIZ</h1>
+        <div className="home_container">
+        <div className="home_wrapper">
+        <h3>QUIZ</h3>
           <>
           {
             gameOver || userAnswers.length==TOTAL_QUESTIONS?(
-              <>
-              <><button onClick = {selectDiff} value='easy'>easy</button>
+              <div className="start_end_container">
+              {number&&showScore?<div className="end-game">
+                <h4>Your score is: {score}</h4>
+                <h4>play again?</h4>
+              </div>:<></>}
+              <button onClick = {selectDiff} value='easy'>easy</button>
               <button onClick = {selectDiff} value='medium'>medium</button>
-              <button onClick = {selectDiff} value='hard'>hard</button></>
-              </>
-            ):<div>Game Started</div>
+              <button onClick = {selectDiff} value='hard'>hard</button>
+              </div>
+            ):<div className="home_text">Game Started</div>
           }
           {
-            !gameOver?<p className="score">score:{score}</p>:null
+            !gameOver?<p className="score home_text"><strong>score:</strong>{score}</p>:null
           }
           {
             loading&&(<p>Loading Questions...</p>)
@@ -158,12 +161,13 @@ const Home=(props:any)=>{
           }
           {
             !gameOver && !loading && userAnswers.length === number +1 && number!==TOTAL_QUESTIONS-1?(
-              <button className="next" onClick={nextQuestion}>
+              <button className="next next_question_button" onClick={nextQuestion}>
                 Next Question
               </button>
             ):null
           }
           </>
+        </div>
         </div>
       </>
     );

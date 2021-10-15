@@ -46,13 +46,8 @@ const Register =(props:any)=>{
       <>
       {
         isLoggedIn?<Redirect to="/" />:
-        <div className="col-md-12">
-        <div className="card card-container">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-          />
+        <div className="register_container">
+        <div className="register_wrapper">
 
           <form
             onSubmit={handleRegister}
