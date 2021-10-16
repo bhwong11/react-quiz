@@ -26,6 +26,7 @@ function Routes(props:any) {
           <span>{currentUser.user.username}</span>
             <Link to={'/profile'}>Profile</Link>
             <Link to={'/'}>Play</Link>
+            <Link to={'/ranks'}>Ranks</Link>
             <a href="/login" onClick={logoutHandler}>Logout</a>
         </div>
       </nav>:
@@ -42,7 +43,7 @@ function Routes(props:any) {
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/register' component={register} />
         <Route exact path='/' component={Home} />
-        <Route exact path='/rank' component={Rank} />
+        <Route exact path='/ranks' component={Rank} />
     </Switch>
     </BrowserRouter>
   );

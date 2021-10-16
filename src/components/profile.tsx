@@ -37,7 +37,7 @@ const Profile= (props:any)=>{
           <strong>Email:</strong> {currentUser.user.email}
         </p>
         <p className="Profile_wrapper_element">
-          <strong>Score:</strong> {currentUser.completeScore}
+          <strong>Score(Rank Points):</strong> {currentUser.completeScore}
         </p>
         {userRank?<p className="Profile_wrapper_element">
           <strong>Rank:</strong>{userRank}

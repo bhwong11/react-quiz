@@ -1,0 +1,40 @@
+:root{
+    --green-sage:#C8CC92;
+    --lavender:#776274;
+    --light-pink:#E6CCBE;
+    --copper-rose:#A07178;
+    --dark-brown:#5A5353;
+    --background:#FFFAFA;
+}
+.ranks_container{
+    display:flex;
+    justify-content: center;
+}
+.ranks_wrapper{
+    margin-top: 5vh;
+    color:var(--dark-brown);
+}
+.ranks_wrapper h3{
+    text-align: center;
+    margin: 10px;
+}
+.ranks_card_wrapper{
+    display:grid;
+    grid-template-columns:auto auto;
+}
+.ranks_card{
+    margin:3px;
+    padding:5px;
+    min-width:300px;
+    border:3px solid var(--dark-brown);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media only screen and (max-width: 680px){
+    .ranks_card_wrapper{
+        display:grid;
+        grid-template-columns:auto;
+    }
+}
