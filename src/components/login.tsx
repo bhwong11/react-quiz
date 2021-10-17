@@ -44,6 +44,7 @@ const Login=(props:any)=>{
     const { history } = props;
     try{
       const loginResult:any = await dispatch(login(username,password))
+      console.log(loginResult)
       if(loginResult.status===200){
         props.history.push("/profile");
         window.location.reload();

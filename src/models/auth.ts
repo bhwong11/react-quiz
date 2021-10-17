@@ -1,4 +1,6 @@
-const url = 'https://quiz-backend-bryant-wong.herokuapp.com/api/';
+const url = 'https://quiz-backend-bryant-wong.herokuapp.com/api';
+
+//const url = 'http://localhost:4000/api';
 
 class Auth{
     static register(data:object){
@@ -8,7 +10,10 @@ class Auth{
             headers:{
                 'Content-Type':'application/json'
             }
-        }).then(response=>response.json())
+        }).then(response=>{
+            console.log(response)
+            return response.json()
+        })
     }
 
     static async login(data:object){
