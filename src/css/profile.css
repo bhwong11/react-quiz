@@ -21,3 +21,9 @@
 .profile_wrapper .Profile_wrapper_element{
     padding:5px;
 }
+
+@media only screen and (min-width: 700px){
+    .profile_wrapper{
+        min-width:400px;
+    }
+}
