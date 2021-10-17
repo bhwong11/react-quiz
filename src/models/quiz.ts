@@ -1,4 +1,4 @@
-const url = 'https://quiz-backend-bryant-wong.herokuapp.com/api/';
+const url = 'https://quiz-backend-bryant-wong.herokuapp.com/api';
 
 class Quiz{
     static all(){
