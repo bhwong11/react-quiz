@@ -12,9 +12,7 @@ const Profile= (props:any)=>{
     const [userScore,setUserScore] = useState(null)
 
     useEffect(():void=>{
-        console.log('CURRENT USER',currentUser)
         UserModel.show().then((json)=>{
-          console.log('JSON',json)
           if(json.status===200){
             setUserRank(json.rank)
             setUserScore(json.user.userScore)
