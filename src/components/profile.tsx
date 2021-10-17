@@ -9,12 +9,15 @@ const Profile= (props:any)=>{
     const {user:currentUser, isLoggedIn:isLoggedIn} = useSelector((state: RootState)=>state.auth)
 
     const [userRank,setUserRank]= useState(null)
+    const [userScore,setUserScore] = useState(null)
 
     useEffect(():void=>{
         console.log('CURRENT USER',currentUser)
         UserModel.show().then((json)=>{
+          console.log('JSON',json)
           if(json.status===200){
             setUserRank(json.rank)
+            setUserScore(json.user.userScore)
           }else{
             setUserRank(json.message)
           }
@@ -37,7 +40,7 @@ const Profile= (props:any)=>{
           <strong>Email:</strong> {currentUser.user.email}
         </p>
         <p className="Profile_wrapper_element">
-          <strong>Score(Rank Points):</strong> {currentUser.completeScore}
+          <strong>Score(Rank Points):</strong> {userScore?userScore:<p>loading score...</p>}
         </p>
         {userRank?<p className="Profile_wrapper_element">
           <strong>Rank:</strong>{userRank}

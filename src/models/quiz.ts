@@ -11,7 +11,9 @@ class Quiz{
             headers:{
                 'Content-type':'application/json'
             },
-        }).then(response=>response.json())
+        }).then(response=>{
+            return response.json()
+        })
     }
     static show(id:String | Number){
         return fetch(`${url}/quiz/${id}`).then(response=>response.json())
